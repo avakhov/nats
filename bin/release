@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+if [ "$1" == "" ]; then
+  echo "ERROR: missed tag arg"
+  exit -1
+fi
+
+if [ -n "$(git status --porcelain)" ]; then
+  echo "ERROR: there are changes"
+  exit -1
+fi
+
+set -x
+git tag $1
+# docker build -t nats .
